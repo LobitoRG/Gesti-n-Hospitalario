@@ -7,6 +7,8 @@ import HomeView from './views/HomeView.jsx'
 import InventarioView from './views/InventarioView.jsx'
 import BitacoraView from './views/BitacoraView.jsx'
 import FormularioView from './views/FormularioView.jsx'
+import LoginView from './views/LoginView.jsx'
+
 
 function isoDate() {
   return new Date().toISOString().slice(0, 10)
@@ -21,6 +23,11 @@ export default function App() {
 
   const [pendientes, setPendientes] = useLocalStorageState('pendientes', [])
   const [terminados, setTerminados] = useLocalStorageState('terminados', [])
+  const [auth, setAuth] = React.useState( JSON.parse(localStorage.getItem('auth')))
+
+if (!auth) {
+  return <LoginView onLogin={() => setAuth(JSON.parse(localStorage.getItem('auth')))} />
+}
 
   // Demo seed
   React.useEffect(() => {
@@ -228,7 +235,8 @@ export default function App() {
 
   return (
     <>
-      <Header view={view} setView={setView} onTrashClick={() => alert('Papelera (demo).')} />
+      <Header view={view} setView={setView} onTrashClick={() => alert('Papelera (demo)')} onAddClick={() => setView('formulario')}/>
+
       <main className="container">
         {content}
         <div className="footer small muted">Aplicación React · Demo localStorage · Puedes conectar MySQL después.</div>

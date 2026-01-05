@@ -2,7 +2,8 @@ import React from 'react'
 import logoLeft from '../assets/logo_left.png'
 import logoRight from '../assets/logo_right.png'
 
-export default function Header({ view, setView, onTrashClick }) {
+
+export default function Header({ view, setView, onTrashClick, onAddClick }) {
   const NavBtn = ({ id, label }) => (
     <button
       className={'nav-btn' + (view === id ? ' active' : '')}
@@ -56,6 +57,13 @@ export default function Header({ view, setView, onTrashClick }) {
 
           <div className="icon-profile" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
             <i className="fa-solid fa-user-circle fa-lg"></i>
+            <i
+  className="fa-solid fa-plus"
+  style={{ color: '#16a34a', cursor: 'pointer' }}
+  title="Agregar"
+  onClick={onAddClick}
+/>
+
             <i
               className="fa-solid fa-trash"
               style={{ color: '#b91c1c', cursor: 'pointer' }}
